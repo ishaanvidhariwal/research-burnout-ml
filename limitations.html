@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Limitations &amp; Next Steps — Academic Burnout ML</title>
+<meta name="description" content="Where the evidence stops: cross-sectional design, self-report, non-representative sample, low scale reliability, performance-inflating design choices, collinearity, and excluded variables — plus the next steps that would address them.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <span class="title">Academic Burnout ML</span>
+  <button class="hamburger" data-nav-open aria-label="Open navigation" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="index.html">
+        <span class="mark">Independent Research</span>
+        <span class="title">Academic Burnout ML</span>
+        <span class="sub">Explainable prediction of student burnout</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <ol>
+        <li><a href="index.html"><span class="n">00</span><span>Home</span></a></li>
+        <li><a href="question.html"><span class="n">01</span><span>The Question</span></a></li>
+        <li><a href="study.html"><span class="n">02</span><span>The Study</span></a></li>
+        <li><a href="data.html"><span class="n">03</span><span>The Data</span></a></li>
+        <li><a href="methods.html"><span class="n">04</span><span>The Method</span></a></li>
+        <li><a href="experiments.html"><span class="n">05</span><span>The Experiments</span></a></li>
+        <li><a href="results.html"><span class="n">06</span><span>The Results</span></a></li>
+        <li><a href="interpretation.html"><span class="n">07</span><span>Interpretation</span></a></li>
+        <li><a href="limitations.html"><span class="n">08</span><span>Limitations</span></a></li>
+        <li><a href="notebook.html"><span class="n">09</span><span>Lab Notebook</span></a></li>
+        <li><a href="paper.html"><span class="n">10</span><span>The Paper</span></a></li>
+        <li><a href="reproducibility.html"><span class="n">—</span><span>Reproduce</span></a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" data-theme-toggle>Dark mode</button>
+      <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+      <span>Manuscript &middot; June 2026 &middot; not peer reviewed</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="wrap page" id="main">
+
+      <header class="page-head">
+        <span class="eyebrow">08 &nbsp;&mdash;&nbsp; Limitations &amp; Next Steps</span>
+        <h1>Where the evidence stops</h1>
+        <p class="lede">Eight constraints bound what can be claimed. Naming them plainly is part
+        of the result &mdash; and each one points to a concrete next study.</p>
+      </header>
+
+      <div class="prose stack-md">
+
+        <h3>1. Cross-sectional design &mdash; no causal inference</h3>
+        <p>Every variable was measured once. It is impossible to tell whether distress, low
+        support, or low efficacy <em>precede</em> burnout or whether burnout produces them
+        through feedback. <strong>Next:</strong> longitudinal measurement across an academic year
+        to establish temporal order.</p>
+
+        <h3>2. Self-report only</h3>
+        <p>All measures are self-reported and subject to social desirability, recall distortion,
+        and mood-congruent responding. <strong>Next:</strong> triangulate with academic records,
+        teacher ratings, attendance, or physiological stress markers.</p>
+
+        <h3>3. Non-representative sample</h3>
+        <p>A convenience sample of Indian secondary and first-year undergraduate students.
+        Academic pressure, support infrastructure, and disclosure norms vary widely across
+        systems, so the pattern may not transfer. <strong>Next:</strong> replication across
+        multiple national contexts.</p>
+
+        <h3>4. Low reliability on three scales</h3>
+        <p>Self-efficacy (&alpha;&nbsp;=&nbsp;.265) and social support (&alpha;&nbsp;=&nbsp;.572)
+        are two-item scales; the burnout composite is questionable (&alpha;&nbsp;=&nbsp;.655).
+        Limited precision most likely <em>understates</em> the protective factors.
+        <strong>Next:</strong> validated multi-item instruments (e.g. MSPSS for support; a full
+        academic self-efficacy subscale; the complete MBI-SS or SBI for burnout).</p>
+
+        <h3>5. Performance-inflating design choices</h3>
+        <p>Binarising burnout at the median creates two balanced, separable classes, and
+        N&nbsp;=&nbsp;321 is modest for machine learning, so cross-validated scores may not
+        generalise. <strong>Next:</strong> model burnout continuously, use a
+        population-referenced threshold, and validate externally on an independent sample.</p>
+
+        <h3>6. Stress&ndash;distress collinearity</h3>
+        <p>The r&nbsp;=&nbsp;.683 correlation between academic stress and distress can inflate
+        standard errors and suppress the apparent unique contribution of stress.
+        <strong>Next:</strong> VIF diagnostics, ridge regression, or SEM that models the shared
+        variance explicitly.</p>
+
+        <h3>7. Burnout treated as one dimension</h3>
+        <p>Exhaustion, cynicism, and reduced efficacy were collapsed into a single composite,
+        obscuring dimension-specific effects. <strong>Next:</strong> full instruments scored as
+        separate subscales, analysed individually.</p>
+
+        <h3>8. Excluded variables</h3>
+        <p>Sleep duration and screen time were collected but left out of the models because of
+        their categorical encoding, despite being theoretically relevant. <strong>Next:</strong>
+        re-include them with ordinal encoding; add sleep quality, academic performance, and peer
+        relationships to the feature set.</p>
+
+        <hr>
+
+        <div class="callout">
+          <span class="tag">Bottom line</span>
+          This is preliminary, proof-of-concept work. It shows that a small set of psychometric
+          items carries a strong, consistent burnout signal and that the signal can be explained.
+          It does <strong>not</strong> establish causation, generalisability, or a deployable
+          screening tool.
+        </div>
+      </div>
+
+      <nav class="pager">
+        <a href="interpretation.html"><span class="dir">Previous</span>07 &mdash; Interpretation</a>
+        <a class="next" href="notebook.html"><span class="dir">Next</span>09 &mdash; Lab Notebook</a>
+      </nav>
+
+    </main>
+
+    <footer class="page-foot">
+      <div class="wrap">
+        <div class="cite" id="cite">
+          <strong>Cite this work</strong><br>
+          Dhariwal, I. (2026). <em>Predicting Academic Burnout in Secondary School and
+          Undergraduate Students Using Explainable Machine Learning: The Roles of Academic
+          Stress, Psychological Distress, Self-Efficacy, and Social Support</em>. Independent
+          student research manuscript.
+          <button class="copy-btn" data-copy="#cite">Copy</button>
+        </div>
+        <div class="flinks">
+          <a href="paper.html">Read the manuscript</a>
+          <a href="reproducibility.html">Reproduce the analysis</a>
+          <a href="study.html#ethics">Ethics &amp; privacy</a>
+          <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+          <span class="muted small">&copy; <span data-year>2026</span> Ishaanvi Dhariwal</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

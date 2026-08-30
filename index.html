@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Academic Burnout ML — Independent Research Lab</title>
+<meta name="description" content="An independent computational study of academic burnout in secondary school and undergraduate students in India, using explainable machine learning. 321 participants, four models, SHAP interpretation.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <span class="title">Academic Burnout ML</span>
+  <button class="hamburger" data-nav-open aria-label="Open navigation" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="index.html">
+        <span class="mark">Independent Research</span>
+        <span class="title">Academic Burnout ML</span>
+        <span class="sub">Explainable prediction of student burnout</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <ol>
+        <li><a href="index.html"><span class="n">00</span><span>Home</span></a></li>
+        <li><a href="question.html"><span class="n">01</span><span>The Question</span></a></li>
+        <li><a href="study.html"><span class="n">02</span><span>The Study</span></a></li>
+        <li><a href="data.html"><span class="n">03</span><span>The Data</span></a></li>
+        <li><a href="methods.html"><span class="n">04</span><span>The Method</span></a></li>
+        <li><a href="experiments.html"><span class="n">05</span><span>The Experiments</span></a></li>
+        <li><a href="results.html"><span class="n">06</span><span>The Results</span></a></li>
+        <li><a href="interpretation.html"><span class="n">07</span><span>Interpretation</span></a></li>
+        <li><a href="limitations.html"><span class="n">08</span><span>Limitations</span></a></li>
+        <li><a href="notebook.html"><span class="n">09</span><span>Lab Notebook</span></a></li>
+        <li><a href="paper.html"><span class="n">10</span><span>The Paper</span></a></li>
+        <li><a href="reproducibility.html"><span class="n">—</span><span>Reproduce</span></a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" data-theme-toggle>Dark mode</button>
+      <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+      <span>Manuscript &middot; June 2026 &middot; not peer reviewed</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="wrap page" id="main">
+
+      <section class="hero">
+        <span class="eyebrow">An independent computational research study</span>
+        <h1>A research lab on academic burnout</h1>
+        <p class="q">Can machine learning identify the psychological factors associated with academic burnout in students &mdash; and explain how it does it?</p>
+        <p class="byline">Ishaanvi Dhariwal &nbsp;&middot;&nbsp; Independent student research &nbsp;&middot;&nbsp; 25 June 2026</p>
+
+        <div class="abstract prose">
+          <p>I investigated whether academic stress, psychological distress, self-efficacy and
+          social support could be used to predict academic burnout among secondary school
+          (Grades&nbsp;9&ndash;12) and first-year undergraduate students in India. Survey data from
+          <strong>321 students</strong> were used to train and compare four classifiers, evaluated with
+          five-fold stratified cross-validation, and <strong>SHAP</strong> analysis was used to make the
+          best model interpretable.</p>
+        </div>
+
+        <div class="cta-row">
+          <a class="btn primary" href="question.html">Start with the question &rarr;</a>
+          <a class="btn" href="results.html">See the results</a>
+          <a class="btn ghost" href="paper.html">Read the paper</a>
+        </div>
+      </section>
+
+      <section class="stats" aria-label="Study at a glance">
+        <div class="stat"><div class="k">321</div><div class="l">student participants</div></div>
+        <div class="stat"><div class="k">4</div><div class="l">models compared</div></div>
+        <div class="stat"><div class="k">5-fold</div><div class="l">stratified cross-validation</div></div>
+        <div class="stat"><div class="k">0.998</div><div class="l">best ROC-AUC (Random Forest)</div></div>
+      </section>
+
+      <section class="prose">
+        <h2>What the study found</h2>
+        <p>Across both classical statistics and machine learning, the same three factors carried
+        the signal. <strong>Psychological distress</strong> was the dominant predictor of burnout
+        (mean&nbsp;|SHAP|&nbsp;=&nbsp;0.231). <strong>Social support</strong> (0.163) and
+        <strong>self-efficacy</strong> (0.110) acted as protective factors. <strong>Academic stress</strong>,
+        despite a strong bivariate correlation with burnout, had the weakest unique contribution
+        (0.056) once distress was in the model &mdash; it appears to work largely <em>through</em>
+        emotional distress rather than independently.</p>
+        <p>A multiple linear regression told the same story: distress, self-efficacy and social
+        support each independently predicted burnout, together explaining 58.3% of its variance
+        (R&sup2;&nbsp;=&nbsp;.583).</p>
+
+        <div class="callout warn">
+          <span class="tag">Read the numbers carefully</span>
+          The headline classification scores are very high. That is partly a consequence of
+          binarising burnout at the sample median &mdash; which produces two well-separated,
+          roughly balanced classes &mdash; and of a modest sample (N&nbsp;=&nbsp;321). These
+          results are <strong>preliminary and proof-of-concept</strong>. The
+          <a href="limitations.html">Limitations</a> and <a href="interpretation.html">Interpretation</a>
+          pages treat this directly.
+        </div>
+      </section>
+
+      <nav class="toc" aria-label="Research contents">
+        <a href="question.html"><span class="n">01</span><span class="t">The Question<span>Research question, motivation, and four hypotheses</span></span><span class="arrow">&rarr;</span></a>
+        <a href="study.html"><span class="n">02</span><span class="t">The Study<span>Participants, measures, procedure, ethics &amp; privacy</span></span><span class="arrow">&rarr;</span></a>
+        <a href="data.html"><span class="n">03</span><span class="t">The Data<span>Data dictionary, reliability, distributions &mdash; raw data kept private</span></span><span class="arrow">&rarr;</span></a>
+        <a href="methods.html"><span class="n">04</span><span class="t">The Method<span>The pipeline, feature set, four algorithms, and SHAP</span></span><span class="arrow">&rarr;</span></a>
+        <a href="experiments.html"><span class="n">05</span><span class="t">The Experiments<span>Baseline, model comparison, feature importance</span></span><span class="arrow">&rarr;</span></a>
+        <a href="results.html"><span class="n">06</span><span class="t">The Results<span>Reliability, correlations, regression, model performance, SHAP</span></span><span class="arrow">&rarr;</span></a>
+        <a href="interpretation.html"><span class="n">07</span><span class="t">Interpretation<span>What the findings mean &mdash; and what they do not</span></span><span class="arrow">&rarr;</span></a>
+        <a href="limitations.html"><span class="n">08</span><span class="t">Limitations &amp; Next Steps<span>Where the evidence stops</span></span><span class="arrow">&rarr;</span></a>
+        <a href="notebook.html"><span class="n">09</span><span class="t">Lab Notebook<span>Methodological decisions and their rationale</span></span><span class="arrow">&rarr;</span></a>
+        <a href="paper.html"><span class="n">10</span><span class="t">The Paper<span>Abstract, full manuscript, references</span></span><span class="arrow">&rarr;</span></a>
+        <a href="reproducibility.html"><span class="n">&mdash;</span><span class="t">Reproduce the Work<span>Environment, pipeline, and how to run it</span></span><span class="arrow">&rarr;</span></a>
+      </nav>
+
+      <section class="prose" style="margin-top:64px">
+        <h2>About the researcher</h2>
+        <p>I am Ishaanvi Dhariwal, an independent student researcher interested in machine
+        learning, human-centred computing, and student wellbeing. This project was completed as
+        independent research and submitted in partial fulfilment of the requirements for
+        independent student research in June&nbsp;2026. It has not been peer reviewed.</p>
+        <p class="small muted">Correspondence and questions:
+        <a class="link" href="mailto:zenene.com@gmail.com">zenene.com@gmail.com</a></p>
+      </section>
+
+    </main>
+
+    <footer class="page-foot">
+      <div class="wrap">
+        <div class="cite" id="cite">
+          <strong>Cite this work</strong><br>
+          Dhariwal, I. (2026). <em>Predicting Academic Burnout in Secondary School and
+          Undergraduate Students Using Explainable Machine Learning: The Roles of Academic
+          Stress, Psychological Distress, Self-Efficacy, and Social Support</em>. Independent
+          student research manuscript.
+          <button class="copy-btn" data-copy="#cite">Copy</button>
+        </div>
+        <div class="flinks">
+          <a href="paper.html">Read the manuscript</a>
+          <a href="reproducibility.html">Reproduce the analysis</a>
+          <a href="study.html#ethics">Ethics &amp; privacy</a>
+          <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+          <span class="muted small">&copy; <span data-year>2026</span> Ishaanvi Dhariwal</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

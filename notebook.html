@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lab Notebook — Academic Burnout ML</title>
+<meta name="description" content="The methodological decisions behind the study and why each was made — target construction, feature choices, missing data, cross-validation, SHAP — plus alternatives considered and not pursued.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <span class="title">Academic Burnout ML</span>
+  <button class="hamburger" data-nav-open aria-label="Open navigation" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="index.html">
+        <span class="mark">Independent Research</span>
+        <span class="title">Academic Burnout ML</span>
+        <span class="sub">Explainable prediction of student burnout</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <ol>
+        <li><a href="index.html"><span class="n">00</span><span>Home</span></a></li>
+        <li><a href="question.html"><span class="n">01</span><span>The Question</span></a></li>
+        <li><a href="study.html"><span class="n">02</span><span>The Study</span></a></li>
+        <li><a href="data.html"><span class="n">03</span><span>The Data</span></a></li>
+        <li><a href="methods.html"><span class="n">04</span><span>The Method</span></a></li>
+        <li><a href="experiments.html"><span class="n">05</span><span>The Experiments</span></a></li>
+        <li><a href="results.html"><span class="n">06</span><span>The Results</span></a></li>
+        <li><a href="interpretation.html"><span class="n">07</span><span>Interpretation</span></a></li>
+        <li><a href="limitations.html"><span class="n">08</span><span>Limitations</span></a></li>
+        <li><a href="notebook.html"><span class="n">09</span><span>Lab Notebook</span></a></li>
+        <li><a href="paper.html"><span class="n">10</span><span>The Paper</span></a></li>
+        <li><a href="reproducibility.html"><span class="n">—</span><span>Reproduce</span></a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" data-theme-toggle>Dark mode</button>
+      <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+      <span>Manuscript &middot; June 2026 &middot; not peer reviewed</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="wrap page" id="main">
+
+      <header class="page-head">
+        <span class="eyebrow">09 &nbsp;&mdash;&nbsp; Lab Notebook</span>
+        <h1>How the study was actually built</h1>
+        <p class="lede">The decisions that shaped the analysis, the reasoning behind each, and
+        what it cost. Where a choice weakened the study, it is marked as such.</p>
+      </header>
+
+      <div class="divider-num"><span class="dn">9.1</span><span class="dl">Phases</span></div>
+      <figure class="fig">
+        <div class="fig-head">Figure &mdash; Project phases</div>
+        <div class="pipeline">
+          <div class="node"><strong>Framing</strong>Research question, theory, choice of psychosocial predictors</div>
+          <div class="arrow"></div>
+          <div class="node"><strong>Instrument</strong>Survey construction from MBI-SS-derived items and stress / distress / efficacy / support items</div>
+          <div class="arrow"></div>
+          <div class="node"><strong>Collection</strong>Anonymous Google Forms distribution until 321 usable responses</div>
+          <div class="arrow"></div>
+          <div class="node"><strong>Analysis</strong>Reliability &rarr; descriptives &rarr; correlations &rarr; regression &rarr; 4-model CV &rarr; SHAP</div>
+          <div class="arrow"></div>
+          <div class="node accent"><strong>Manuscript</strong>Submitted 25 June 2026 &middot; not peer reviewed</div>
+        </div>
+      </figure>
+
+      <div class="divider-num"><span class="dn">9.2</span><span class="dl">Decisions &amp; rationale</span></div>
+      <div class="prose stack-md">
+
+        <h3>Dichotomise burnout at the median</h3>
+        <p><strong>Why:</strong> to enable binary classifiers and stay comparable with prior
+        burnout-classification work. Median split gives roughly balanced classes (181 / 140).<br>
+        <strong>Cost:</strong> throws away information in the continuous score and manufactures
+        well-separated classes that make the task easier &mdash; a direct contributor to the
+        very high scores. Flagged on <a href="limitations.html">Limitations #5</a>.</p>
+
+        <h3>Restrict features to four continuous composites</h3>
+        <p><strong>Why:</strong> a small, theoretically grounded feature set keeps the model
+        interpretable and the SHAP story legible; all four map onto established constructs.<br>
+        <strong>Cost:</strong> excludes potentially useful predictors; narrow feature space can
+        also make separation look cleaner than it would with noisier real-world inputs.</p>
+
+        <h3>Exclude sleep and screen time</h3>
+        <p><strong>Why:</strong> both were collected only in categorical bands; mixing them
+        into a continuous, z-scored feature set without a principled encoding was judged worse
+        than leaving them out.<br>
+        <strong>Cost:</strong> loses theoretically relevant signal. Re-including them with
+        ordinal encoding is an explicit next step.</p>
+
+        <h3>Reverse-score the efficacy items into the burnout composite</h3>
+        <p><strong>Why:</strong> in the burnout framework, reduced academic efficacy <em>is</em>
+        a burnout dimension, so low efficacy should raise the composite. Items were recoded
+        (6&nbsp;&minus;&nbsp;raw) before averaging.<br>
+        <strong>Cost:</strong> self-efficacy also appears as a separate predictor, so the two
+        share item-level content by design &mdash; a point to keep in mind when reading its
+        coefficient.</p>
+
+        <h3>Complete-case analysis</h3>
+        <p><strong>Why:</strong> item-level missingness was under 1%; imputation would add
+        complexity for negligible gain.<br>
+        <strong>Cost:</strong> minimal here; would not scale to a dataset with real missingness.</p>
+
+        <h3>Fit standardisation inside each CV fold</h3>
+        <p><strong>Why:</strong> fitting the scaler on the whole dataset before splitting leaks
+        test-fold statistics into training &mdash; one of the most common causes of silently
+        inflated cross-validation scores.<br>
+        <strong>Cost:</strong> none; this is the correct default.</p>
+
+        <h3>Keep the two-item protective scales despite low alpha</h3>
+        <p><strong>Why:</strong> Cronbach&rsquo;s alpha is mathematically suppressed for
+        two-item scales regardless of item quality; the constructs are theoretically essential
+        and their effects held up in both analyses.<br>
+        <strong>Cost:</strong> genuine measurement imprecision remains and probably understates
+        the protective effects. Validated multi-item scales are the fix.</p>
+
+        <h3>Compare four algorithms across the complexity spectrum</h3>
+        <p><strong>Why:</strong> running Logistic Regression alongside SVM, Random Forest and
+        XGBoost answers whether nonlinear flexibility actually buys predictive gain here, and
+        provides a cross-model consistency check on the feature ranking.<br>
+        <strong>Cost:</strong> none; strengthens the conclusion.</p>
+
+        <h3>Compute SHAP on the Random Forest with <code>TreeExplainer</code></h3>
+        <p><strong>Why:</strong> Random Forest was the best model; <code>TreeExplainer</code>
+        gives exact SHAP values efficiently for tree ensembles, over all 321 observations.<br>
+        <strong>Cost:</strong> the explanation is specific to that model; a different top model
+        could shift local attributions.</p>
+
+        <h3>Report mean and SD across the five folds</h3>
+        <p><strong>Why:</strong> a single split is noisy; fold-averaged metrics with dispersion
+        are the minimum honest summary.<br>
+        <strong>Cost:</strong> still one sample and one CV seed &mdash; repeated CV across seeds
+        is not yet done.</p>
+      </div>
+
+      <div class="divider-num"><span class="dn">9.3</span><span class="dl">Considered, not pursued</span></div>
+      <div class="prose">
+        <ul>
+          <li><strong>Continuous-outcome modelling</strong> (regression / ordinal ML on the raw
+          burnout score) instead of a median split.</li>
+          <li><strong>Repeated cross-validation across random seeds</strong> to quantify
+          run-to-run variance, plus hyperparameter sensitivity analysis.</li>
+          <li><strong>VIF / ridge / SEM</strong> to handle the stress&ndash;distress collinearity
+          explicitly rather than noting it.</li>
+          <li><strong>Validated multi-item instruments</strong> (MSPSS, full academic
+          self-efficacy subscale, complete MBI-SS or SBI).</li>
+          <li><strong>External validation</strong> on an independent cohort &mdash; the single
+          most important missing piece.</li>
+        </ul>
+        <p class="small muted">These are recorded here rather than buried so a reader knows they
+        were consciously deferred, not overlooked.</p>
+      </div>
+
+      <nav class="pager">
+        <a href="limitations.html"><span class="dir">Previous</span>08 &mdash; Limitations</a>
+        <a class="next" href="paper.html"><span class="dir">Next</span>10 &mdash; The Paper</a>
+      </nav>
+
+    </main>
+
+    <footer class="page-foot">
+      <div class="wrap">
+        <div class="cite" id="cite">
+          <strong>Cite this work</strong><br>
+          Dhariwal, I. (2026). <em>Predicting Academic Burnout in Secondary School and
+          Undergraduate Students Using Explainable Machine Learning: The Roles of Academic
+          Stress, Psychological Distress, Self-Efficacy, and Social Support</em>. Independent
+          student research manuscript.
+          <button class="copy-btn" data-copy="#cite">Copy</button>
+        </div>
+        <div class="flinks">
+          <a href="paper.html">Read the manuscript</a>
+          <a href="reproducibility.html">Reproduce the analysis</a>
+          <a href="study.html#ethics">Ethics &amp; privacy</a>
+          <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+          <span class="muted small">&copy; <span data-year>2026</span> Ishaanvi Dhariwal</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

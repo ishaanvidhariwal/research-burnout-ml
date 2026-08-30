@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Results — Academic Burnout ML</title>
+<meta name="description" content="Reliability, descriptive statistics, correlations, multiple linear regression (R2 = .583), machine learning model performance, and SHAP feature importance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <span class="title">Academic Burnout ML</span>
+  <button class="hamburger" data-nav-open aria-label="Open navigation" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="index.html">
+        <span class="mark">Independent Research</span>
+        <span class="title">Academic Burnout ML</span>
+        <span class="sub">Explainable prediction of student burnout</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <ol>
+        <li><a href="index.html"><span class="n">00</span><span>Home</span></a></li>
+        <li><a href="question.html"><span class="n">01</span><span>The Question</span></a></li>
+        <li><a href="study.html"><span class="n">02</span><span>The Study</span></a></li>
+        <li><a href="data.html"><span class="n">03</span><span>The Data</span></a></li>
+        <li><a href="methods.html"><span class="n">04</span><span>The Method</span></a></li>
+        <li><a href="experiments.html"><span class="n">05</span><span>The Experiments</span></a></li>
+        <li><a href="results.html"><span class="n">06</span><span>The Results</span></a></li>
+        <li><a href="interpretation.html"><span class="n">07</span><span>Interpretation</span></a></li>
+        <li><a href="limitations.html"><span class="n">08</span><span>Limitations</span></a></li>
+        <li><a href="notebook.html"><span class="n">09</span><span>Lab Notebook</span></a></li>
+        <li><a href="paper.html"><span class="n">10</span><span>The Paper</span></a></li>
+        <li><a href="reproducibility.html"><span class="n">—</span><span>Reproduce</span></a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" data-theme-toggle>Dark mode</button>
+      <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+      <span>Manuscript &middot; June 2026 &middot; not peer reviewed</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="wrap page" id="main">
+
+      <header class="page-head">
+        <span class="eyebrow">06 &nbsp;&mdash;&nbsp; The Results</span>
+        <h1>What the models found</h1>
+        <p class="lede">Statistics and machine learning converge: distress drives burnout,
+        support and efficacy protect against it, and academic stress adds little once distress
+        is accounted for.</p>
+      </header>
+
+      <div class="kpis">
+        <div class="kpi"><div class="kv">.583</div><div class="kl">variance in burnout explained (R&sup2;)</div></div>
+        <div class="kpi"><div class="kv">.998</div><div class="kl">best ROC-AUC (Random Forest)</div></div>
+        <div class="kpi"><div class="kv">.975</div><div class="kl">best accuracy (Random Forest)</div></div>
+        <div class="kpi"><div class="kv">.231</div><div class="kl">top mean |SHAP| (distress)</div></div>
+      </div>
+
+      <div class="divider-num"><span class="dn">6.1</span><span class="dl">Reliability</span></div>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Table 1 &mdash; Cronbach&rsquo;s &alpha; for the composite scales</caption>
+          <thead><tr><th>Scale</th><th class="num">Items</th><th class="num">&alpha;</th><th>Interpretation</th></tr></thead>
+          <tbody>
+            <tr><td>Academic stress</td><td class="num">5</td><td class="num">.823</td><td class="note-cell">Good</td></tr>
+            <tr><td>Psychological distress</td><td class="num">3</td><td class="num">.827</td><td class="note-cell">Good</td></tr>
+            <tr><td>Academic burnout</td><td class="num">7</td><td class="num">.655</td><td class="note-cell">Questionable &mdash; multidimensional composite</td></tr>
+            <tr><td>Social support</td><td class="num">2</td><td class="num">.572</td><td class="note-cell">Low &mdash; two-item structural limit</td></tr>
+            <tr><td>Self-efficacy</td><td class="num">2</td><td class="num">.265</td><td class="note-cell">Low &mdash; two-item structural limit (inter-item r = .26)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="divider-num"><span class="dn">6.2</span><span class="dl">Descriptive statistics</span></div>
+      <div class="prose">
+        <p>All composites sit on a 1&ndash;5 metric with means between <strong>3.31 and 3.67</strong>,
+        approximately symmetric (all |skew|&nbsp;&lt;&nbsp;.50) and mildly platykurtic &mdash;
+        adequate for parametric analysis. The burnout composite median is <strong>3.29</strong>.
+        Per-scale means and SDs are in Table&nbsp;2 of the <a href="paper.html">manuscript</a>.</p>
+      </div>
+
+      <div class="divider-num"><span class="dn">6.3</span><span class="dl">Correlations</span></div>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Table 3 &mdash; Pearson correlations (N = 321)</caption>
+          <thead><tr><th>Pair</th><th class="num">r</th><th>Direction</th></tr></thead>
+          <tbody>
+            <tr><td>Psychological distress &times; Burnout</td><td class="num">.563</td><td class="note-cell">Risk (p &lt; .001)</td></tr>
+            <tr><td>Social support &times; Burnout</td><td class="num">&minus;.470</td><td class="note-cell">Protective (p &lt; .001)</td></tr>
+            <tr><td>Academic stress &times; Burnout</td><td class="num">.441</td><td class="note-cell">Risk (p &lt; .001)</td></tr>
+            <tr><td>Self-efficacy &times; Burnout</td><td class="num">&minus;.398</td><td class="note-cell">Protective (p &lt; .001)</td></tr>
+            <tr class="hi"><td>Academic stress &times; Psychological distress</td><td class="num">.683</td><td class="note-cell">Strong overlap between the two risk factors</td></tr>
+          </tbody>
+        </table>
+        <p class="tnote">Every predictor is significantly related to burnout on its own. The final
+        row is the collinearity that reshapes the regression below.</p>
+      </div>
+
+      <div class="divider-num" id="regression"><span class="dn">6.4</span><span class="dl">Multiple linear regression</span></div>
+      <div class="prose stack-md">
+        <p>Predicting the continuous burnout score from all four factors at once:
+        <strong>F(4,&nbsp;316)&nbsp;=&nbsp;110.41, p&nbsp;&lt;&nbsp;.001, R&sup2;&nbsp;=&nbsp;.583</strong>
+        (adjusted R&sup2;&nbsp;=&nbsp;.578).</p>
+      </div>
+
+      <div class="donut-wrap card">
+        <svg class="donut" viewBox="0 0 120 120" role="img" aria-label="R-squared is 0.583">
+          <circle cx="60" cy="60" r="54" fill="none" stroke="var(--surface-2)" stroke-width="12"></circle>
+          <circle cx="60" cy="60" r="54" fill="none" stroke="var(--accent)" stroke-width="12"
+                  stroke-dasharray="197.8 141.5" stroke-dashoffset="0"
+                  transform="rotate(-90 60 60)" stroke-linecap="butt"></circle>
+          <text x="60" y="58" text-anchor="middle" font-family="var(--serif)" font-size="21" font-weight="700" fill="var(--ink)">58.3%</text>
+          <text x="60" y="76" text-anchor="middle" font-family="var(--sans)" font-size="9" fill="var(--muted)">of burnout variance</text>
+        </svg>
+        <div>
+          <p style="margin:0 0 8px"><strong>The four factors together account for 58.3% of the
+          variance in burnout scores.</strong></p>
+          <p class="small muted" style="margin:0">The remaining ~42% is other factors, measurement
+          error, and the multidimensionality of the burnout composite.</p>
+        </div>
+      </div>
+
+      <figure class="fig">
+        <div class="fig-head">Figure &mdash; Standardised-scale regression coefficients (B), centred at zero</div>
+        <div class="divchart">
+          <div class="drow"><div class="dlabel">Psychological distress</div><div class="dtrack"><div class="dmid"></div><div class="dfill" style="left:50%;width:35.6%"></div></div><div class="dval">+0.356&#8202;***</div></div>
+          <div class="drow"><div class="dlabel">Social support</div><div class="dtrack"><div class="dmid"></div><div class="dfill protective" style="left:18.6%;width:31.4%"></div></div><div class="dval">&minus;0.314&#8202;***</div></div>
+          <div class="drow"><div class="dlabel">Self-efficacy</div><div class="dtrack"><div class="dmid"></div><div class="dfill protective" style="left:19.2%;width:30.8%"></div></div><div class="dval">&minus;0.308&#8202;***</div></div>
+          <div class="drow"><div class="dlabel">Academic stress</div><div class="dtrack"><div class="dmid"></div><div class="dfill" style="left:40.4%;width:9.6%;opacity:.4"></div></div><div class="dval">&minus;0.096 ns</div></div>
+        </div>
+        <figcaption>*** p&nbsp;&lt;&nbsp;.001; ns = not significant. Track spans B&nbsp;=&nbsp;&minus;0.5
+        to +0.5. Academic stress reverses sign and loses significance here &mdash; a classic
+        multicollinearity signature given its r&nbsp;=&nbsp;.683 overlap with distress.</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Table 4 &mdash; Regression predicting academic burnout (N = 321)</caption>
+          <thead><tr><th>Predictor</th><th class="num">B</th><th class="num">SE</th><th class="num">t</th><th class="num">p</th></tr></thead>
+          <tbody>
+            <tr><td>Psychological distress</td><td class="num">0.356</td><td class="num">0.036</td><td class="num">9.87</td><td class="num">&lt; .001</td></tr>
+            <tr><td>Self-efficacy</td><td class="num">&minus;0.308</td><td class="num">0.028</td><td class="num">&minus;11.10</td><td class="num">&lt; .001</td></tr>
+            <tr><td>Social support</td><td class="num">&minus;0.314</td><td class="num">0.033</td><td class="num">&minus;9.66</td><td class="num">&lt; .001</td></tr>
+            <tr><td>Academic stress</td><td class="num">&minus;0.096</td><td class="num">0.060</td><td class="num">&minus;1.62</td><td class="num">.107</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="divider-num" id="performance"><span class="dn">6.5</span><span class="dl">Machine learning performance</span></div>
+      <div class="prose"><p>Five-fold stratified cross-validation, mean across folds.</p></div>
+
+      <div class="selector" data-selector>
+        <div class="tabs" role="tablist" aria-label="Metric">
+          <button role="tab" aria-selected="true">ROC-AUC</button>
+          <button role="tab" aria-selected="false">Accuracy</button>
+        </div>
+        <div class="panel active" role="tabpanel">
+          <div class="barchart">
+            <div class="bar-row emph"><div class="bar-label">Random Forest</div><div class="bar-track"><div class="bar-fill" style="width:99.8%"></div></div><div class="bar-val">.998</div></div>
+            <div class="bar-row"><div class="bar-label">XGBoost</div><div class="bar-track"><div class="bar-fill" style="width:99.4%"></div></div><div class="bar-val">.994</div></div>
+            <div class="bar-row"><div class="bar-label">SVM (RBF)</div><div class="bar-track"><div class="bar-fill" style="width:95.9%"></div></div><div class="bar-val">.959</div></div>
+            <div class="bar-row"><div class="bar-label">Logistic Regression</div><div class="bar-track"><div class="bar-fill" style="width:95.2%"></div></div><div class="bar-val">.952</div></div>
+          </div>
+        </div>
+        <div class="panel" role="tabpanel">
+          <div class="barchart">
+            <div class="bar-row emph"><div class="bar-label">Random Forest</div><div class="bar-track"><div class="bar-fill" style="width:97.5%"></div></div><div class="bar-val">.975</div></div>
+            <div class="bar-row"><div class="bar-label">XGBoost</div><div class="bar-track"><div class="bar-fill" style="width:96.3%"></div></div><div class="bar-val">.963</div></div>
+            <div class="bar-row"><div class="bar-label">SVM (RBF)</div><div class="bar-track"><div class="bar-fill" style="width:93.1%"></div></div><div class="bar-val">.931</div></div>
+            <div class="bar-row"><div class="bar-label">Logistic Regression</div><div class="bar-track"><div class="bar-fill" style="width:87.9%"></div></div><div class="bar-val">.879</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Table 5 &mdash; Classification performance, 5-fold stratified CV</caption>
+          <thead><tr><th>Model</th><th class="num">Accuracy</th><th class="num">Precision</th><th class="num">Recall</th><th class="num">F1</th><th class="num">ROC-AUC</th></tr></thead>
+          <tbody>
+            <tr><td>Logistic Regression</td><td class="num">.879</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">.952</td></tr>
+            <tr><td>SVM (RBF)</td><td class="num">.931</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">.959</td></tr>
+            <tr><td>XGBoost</td><td class="num">.963</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">.994</td></tr>
+            <tr class="hi"><td>Random Forest *</td><td class="num">.975</td><td class="num">.989</td><td class="num">.967</td><td class="num">.977</td><td class="num">.998</td></tr>
+          </tbody>
+        </table>
+        <p class="tnote">* Best model. Precision, recall and F1 are reported here for the best
+        model as given in the manuscript narrative; the per-model values for the other three
+        classifiers are in Table&nbsp;5 of the full <a href="paper.html">paper</a>.</p>
+      </div>
+
+      <div class="prose stack-md">
+        <p>Even Logistic Regression reaches 87.9% accuracy and .952 AUC &mdash; strong evidence
+        the predictor&ndash;burnout structure is robust and largely linear. Random Forest and
+        XGBoost add a few points on top. Why the scores are so high is treated directly on
+        <a href="interpretation.html#leakage">Interpretation</a> and
+        <a href="limitations.html">Limitations</a>.</p>
+      </div>
+
+      <div class="divider-num" id="shap"><span class="dn">6.6</span><span class="dl">SHAP feature importance</span></div>
+      <figure class="fig">
+        <div class="fig-head">Figure 2 &mdash; Mean |SHAP| value per feature, Random Forest (N = 321)</div>
+        <div class="barchart">
+          <div class="bar-row emph"><div class="bar-label">Psychological distress</div><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><div class="bar-val">.231</div></div>
+          <div class="bar-row"><div class="bar-label">Social support</div><div class="bar-track"><div class="bar-fill pos" style="width:70.6%"></div></div><div class="bar-val">.163</div></div>
+          <div class="bar-row"><div class="bar-label">Self-efficacy</div><div class="bar-track"><div class="bar-fill pos" style="width:47.6%"></div></div><div class="bar-val">.110</div></div>
+          <div class="bar-row"><div class="bar-label">Academic stress</div><div class="bar-track"><div class="bar-fill" style="width:24.2%"></div></div><div class="bar-val">.056</div></div>
+        </div>
+        <figcaption>Distress carries just over 4&times; the weight of academic stress. In the
+        SHAP summary plot (Figure&nbsp;5 of the manuscript), higher distress and higher academic
+        stress push predictions toward high burnout, while higher social support and higher
+        self-efficacy push them toward low burnout &mdash; directions that match the regression
+        signs exactly.</figcaption>
+      </figure>
+
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Table 6 &mdash; SHAP importance, Random Forest</caption>
+          <thead><tr><th>Feature</th><th class="num">Mean |SHAP|</th><th>Role at higher values</th></tr></thead>
+          <tbody>
+            <tr class="hi"><td>Psychological distress</td><td class="num">0.231</td><td class="note-cell">Increases burnout probability</td></tr>
+            <tr><td>Social support</td><td class="num">0.163</td><td class="note-cell">Decreases burnout probability (protective)</td></tr>
+            <tr><td>Self-efficacy</td><td class="num">0.110</td><td class="note-cell">Decreases burnout probability (protective)</td></tr>
+            <tr><td>Academic stress</td><td class="num">0.056</td><td class="note-cell">Weak positive contribution</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <nav class="pager">
+        <a href="experiments.html"><span class="dir">Previous</span>05 &mdash; The Experiments</a>
+        <a class="next" href="interpretation.html"><span class="dir">Next</span>07 &mdash; Interpretation</a>
+      </nav>
+
+    </main>
+
+    <footer class="page-foot">
+      <div class="wrap">
+        <div class="cite" id="cite">
+          <strong>Cite this work</strong><br>
+          Dhariwal, I. (2026). <em>Predicting Academic Burnout in Secondary School and
+          Undergraduate Students Using Explainable Machine Learning: The Roles of Academic
+          Stress, Psychological Distress, Self-Efficacy, and Social Support</em>. Independent
+          student research manuscript.
+          <button class="copy-btn" data-copy="#cite">Copy</button>
+        </div>
+        <div class="flinks">
+          <a href="paper.html">Read the manuscript</a>
+          <a href="reproducibility.html">Reproduce the analysis</a>
+          <a href="study.html#ethics">Ethics &amp; privacy</a>
+          <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+          <span class="muted small">&copy; <span data-year>2026</span> Ishaanvi Dhariwal</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

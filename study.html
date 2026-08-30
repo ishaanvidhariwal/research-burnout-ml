@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Study — Academic Burnout ML</title>
+<meta name="description" content="Study design: 321 secondary school and first-year undergraduate participants in India, the six survey measures, the procedure, and the ethics and privacy safeguards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <span class="title">Academic Burnout ML</span>
+  <button class="hamburger" data-nav-open aria-label="Open navigation" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="index.html">
+        <span class="mark">Independent Research</span>
+        <span class="title">Academic Burnout ML</span>
+        <span class="sub">Explainable prediction of student burnout</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <ol>
+        <li><a href="index.html"><span class="n">00</span><span>Home</span></a></li>
+        <li><a href="question.html"><span class="n">01</span><span>The Question</span></a></li>
+        <li><a href="study.html"><span class="n">02</span><span>The Study</span></a></li>
+        <li><a href="data.html"><span class="n">03</span><span>The Data</span></a></li>
+        <li><a href="methods.html"><span class="n">04</span><span>The Method</span></a></li>
+        <li><a href="experiments.html"><span class="n">05</span><span>The Experiments</span></a></li>
+        <li><a href="results.html"><span class="n">06</span><span>The Results</span></a></li>
+        <li><a href="interpretation.html"><span class="n">07</span><span>Interpretation</span></a></li>
+        <li><a href="limitations.html"><span class="n">08</span><span>Limitations</span></a></li>
+        <li><a href="notebook.html"><span class="n">09</span><span>Lab Notebook</span></a></li>
+        <li><a href="paper.html"><span class="n">10</span><span>The Paper</span></a></li>
+        <li><a href="reproducibility.html"><span class="n">—</span><span>Reproduce</span></a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" data-theme-toggle>Dark mode</button>
+      <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+      <span>Manuscript &middot; June 2026 &middot; not peer reviewed</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="wrap page" id="main">
+
+      <header class="page-head">
+        <span class="eyebrow">02 &nbsp;&mdash;&nbsp; The Study</span>
+        <h1>How the question was investigated</h1>
+        <p class="lede">A single anonymous survey, six psychosocial measures, and a design that
+        trades depth for reach &mdash; a cross-sectional convenience sample of 321 students.</p>
+      </header>
+
+      <figure class="fig">
+        <div class="fig-head">Figure &mdash; Study pipeline</div>
+        <div class="pipeline">
+          <div class="node"><strong>Participants</strong>321 students, Grades 9&ndash;12 &amp; year-1 undergraduate, India</div>
+          <div class="arrow"></div>
+          <div class="node"><strong>Survey</strong>Google Forms, anonymous, 5-point Likert items</div>
+          <div class="arrow"></div>
+          <div class="node"><strong>Composite scores</strong>Mean of items per construct; efficacy reverse-scored into burnout</div>
+          <div class="arrow"></div>
+          <div class="node"><strong>Target construction</strong>Burnout dichotomised at the sample median (3.29)</div>
+          <div class="arrow"></div>
+          <div class="node"><strong>Standardisation</strong>z-scored inside each CV fold</div>
+          <div class="arrow"></div>
+          <div class="node accent"><strong>4 models &times; 5-fold CV &rarr; SHAP</strong></div>
+        </div>
+        <figcaption>Every preprocessing step that could leak information &mdash; scaling in
+        particular &mdash; was fit only on training folds. See <a href="methods.html">The Method</a>.</figcaption>
+      </figure>
+
+      <div class="divider-num"><span class="dn">2.1</span><span class="dl">Participants</span></div>
+      <div class="prose stack-md">
+        <p><strong>N&nbsp;=&nbsp;321.</strong> Students currently enrolled in Grades&nbsp;9&ndash;12
+        (secondary school) or a first-year undergraduate programme, recruited through school
+        networks, social-media platforms, and peer referral in India. The only inclusion
+        criterion was current enrolment at one of these levels.</p>
+        <p>This is a <strong>convenience sample</strong>. It was not randomly drawn from any
+        defined population, so it cannot be assumed to represent Indian students as a whole, and
+        findings should not be generalised to other education systems without replication. The
+        <a href="limitations.html">Limitations</a> page treats sampling in detail.</p>
+        <div class="kpis">
+          <div class="kpi"><div class="kv">321</div><div class="kl">usable responses</div></div>
+          <div class="kpi"><div class="kv">&lt;1%</div><div class="kl">missing data (item level)</div></div>
+          <div class="kpi"><div class="kv">181</div><div class="kl">classified high-burnout (56.4%)</div></div>
+          <div class="kpi"><div class="kv">140</div><div class="kl">classified low-burnout (43.6%)</div></div>
+        </div>
+      </div>
+
+      <div class="divider-num"><span class="dn">2.2</span><span class="dl">Measures</span></div>
+      <div class="prose">
+        <p>All items used a five-point Likert-type scale. Each construct score is the unweighted
+        mean of its items; higher scores mean more of the named construct. Full item wording is
+        in <a href="paper.html#appendix">Appendix&nbsp;A</a> of the manuscript.</p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Table &mdash; The six survey measures</caption>
+          <thead>
+            <tr><th>Construct</th><th class="num">Items</th><th>Role</th><th class="num">Cronbach&rsquo;s &alpha;</th><th>Notes</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Academic stress</td><td class="num">5</td><td>Predictor</td><td class="num">.823</td><td class="note-cell">Overwhelm, grade pressure, performance worry, exam worry, work&ndash;life balance</td></tr>
+            <tr><td>Psychological distress</td><td class="num">3</td><td>Predictor</td><td class="num">.827</td><td class="note-cell">Feeling overwhelmed, difficulty coping, persistent worry (past month)</td></tr>
+            <tr class="hi"><td>Academic burnout</td><td class="num">7</td><td>Outcome</td><td class="num">.655</td><td class="note-cell">3 exhaustion + 2 cynicism + 2 efficacy items (efficacy reverse-scored)</td></tr>
+            <tr><td>Self-efficacy</td><td class="num">2</td><td>Predictor (protective)</td><td class="num">.265</td><td class="note-cell">Two-item scale; inter-item r&nbsp;=&nbsp;.26. Alpha structurally suppressed</td></tr>
+            <tr><td>Social support</td><td class="num">2</td><td>Predictor (protective)</td><td class="num">.572</td><td class="note-cell">Two-item scale; family support + knowing where to seek help</td></tr>
+            <tr><td>Sleep &amp; screen time</td><td class="num">3</td><td>Excluded</td><td class="num">&mdash;</td><td class="note-cell">Categorical response format; not entered into the models</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="prose stack-md">
+        <div class="callout warn">
+          <span class="tag">Measurement caveat</span>
+          The burnout composite is only of <em>questionable</em> internal consistency
+          (&alpha;&nbsp;=&nbsp;.655), and the two protective scales have low alpha because
+          two-item scales suppress the statistic regardless of item quality. Limited measurement
+          precision most likely <strong>understates</strong> the protective factors&rsquo;
+          contributions. This is discussed on <a href="limitations.html">Limitations</a>.
+        </div>
+
+        <h3>Why psychological distress is separate from academic stress</h3>
+        <p>Academic stress is domain-specific: it is about schoolwork, grades, and exams.
+        Psychological distress is broader &mdash; general trouble regulating emotion, persistent
+        worry, and coping under pressure from any source. Measuring them separately is what makes
+        it possible to ask whether burnout is driven by the academic load specifically, or by a
+        wider emotional burden. The <a href="results.html">results</a> point to the latter.</p>
+      </div>
+
+      <div class="divider-num"><span class="dn">2.3</span><span class="dl">Procedure</span></div>
+      <div class="prose stack-md">
+        <ul>
+          <li>The survey was administered electronically via Google Forms and distributed through
+          school and undergraduate contacts, social media, and peer referral.</li>
+          <li>Collection continued until 321 usable responses were obtained after removing
+          duplicate submissions identified through response-pattern analysis.</li>
+          <li>No monetary or academic compensation was offered.</li>
+          <li>Composite scores were computed as item means. For the burnout composite, the two
+          academic-efficacy items were reverse-scored (6&nbsp;&minus;&nbsp;raw) before averaging,
+          so that higher values indicate <em>lower</em> efficacy and therefore greater burnout.</li>
+          <li><strong>Complete-case analysis</strong> was used: a participant missing any item on
+          a given scale was dropped from analyses involving that scale. With missingness under
+          1%, the effect on statistical power was negligible.</li>
+        </ul>
+      </div>
+
+      <div class="divider-num" id="ethics"><span class="dn">2.4</span><span class="dl">Ethics &amp; privacy</span></div>
+      <div class="prose stack-md">
+        <p>The study involves minors and asks about emotional wellbeing, so the safeguards matter.
+        What the consent statement told every participant before they began:</p>
+        <ul>
+          <li>the study&rsquo;s purpose is <strong>academic research only</strong>;</li>
+          <li>participation is entirely <strong>voluntary</strong>, with an unrestricted right to
+          withdraw at any point without consequence;</li>
+          <li>all responses are <strong>anonymous and confidential</strong>;</li>
+          <li><strong>no personally identifiable information</strong> is collected at any stage;</li>
+          <li>responses will <strong>not be shared</strong> with teachers, parents, or any
+          institutional body;</li>
+          <li>general mental-health resources are available should any item cause distress.</li>
+        </ul>
+
+        <div class="privacy-lock">
+          <span class="ico">&#128274;</span>
+          <div>
+            <strong>The raw participant data is not published on this site.</strong>
+            Because responses come from students and include wellbeing items, the individual-level
+            dataset is kept private. What is shared instead: the full
+            <a href="data.html">data dictionary</a>, aggregate statistics and distributions, a
+            small synthetic sample with the same structure, and the
+            <a href="reproducibility.html">analysis code</a>. Aggregate results are reported
+            throughout with no cell small enough to risk re-identification.
+          </div>
+        </div>
+
+        <p class="small muted">This was independent student research. It was conducted following
+        standard ethical practice for anonymous, minimal-risk survey research &mdash; informed
+        consent, no identifying data, voluntary participation, withdrawal rights &mdash; but did
+        not undergo review by an institutional ethics board.</p>
+      </div>
+
+      <nav class="pager">
+        <a href="question.html"><span class="dir">Previous</span>01 &mdash; The Question</a>
+        <a class="next" href="data.html"><span class="dir">Next</span>03 &mdash; The Data</a>
+      </nav>
+
+    </main>
+
+    <footer class="page-foot">
+      <div class="wrap">
+        <div class="cite" id="cite">
+          <strong>Cite this work</strong><br>
+          Dhariwal, I. (2026). <em>Predicting Academic Burnout in Secondary School and
+          Undergraduate Students Using Explainable Machine Learning: The Roles of Academic
+          Stress, Psychological Distress, Self-Efficacy, and Social Support</em>. Independent
+          student research manuscript.
+          <button class="copy-btn" data-copy="#cite">Copy</button>
+        </div>
+        <div class="flinks">
+          <a href="paper.html">Read the manuscript</a>
+          <a href="reproducibility.html">Reproduce the analysis</a>
+          <a href="study.html#ethics">Ethics &amp; privacy</a>
+          <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+          <span class="muted small">&copy; <span data-year>2026</span> Ishaanvi Dhariwal</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

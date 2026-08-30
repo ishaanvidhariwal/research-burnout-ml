@@ -1,0 +1,9 @@
+# Python 3.11 — pin exact versions with `pip freeze > requirements.txt` before publishing
+numpy
+pandas
+scikit-learn
+xgboost
+shap
+statsmodels
+pingouin
+matplotlib

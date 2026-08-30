@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Question — Academic Burnout ML</title>
+<meta name="description" content="The research question behind the study, why it matters, the theoretical background, and four directional hypotheses about risk and protective factors for academic burnout.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <span class="title">Academic Burnout ML</span>
+  <button class="hamburger" data-nav-open aria-label="Open navigation" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="index.html">
+        <span class="mark">Independent Research</span>
+        <span class="title">Academic Burnout ML</span>
+        <span class="sub">Explainable prediction of student burnout</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <ol>
+        <li><a href="index.html"><span class="n">00</span><span>Home</span></a></li>
+        <li><a href="question.html"><span class="n">01</span><span>The Question</span></a></li>
+        <li><a href="study.html"><span class="n">02</span><span>The Study</span></a></li>
+        <li><a href="data.html"><span class="n">03</span><span>The Data</span></a></li>
+        <li><a href="methods.html"><span class="n">04</span><span>The Method</span></a></li>
+        <li><a href="experiments.html"><span class="n">05</span><span>The Experiments</span></a></li>
+        <li><a href="results.html"><span class="n">06</span><span>The Results</span></a></li>
+        <li><a href="interpretation.html"><span class="n">07</span><span>Interpretation</span></a></li>
+        <li><a href="limitations.html"><span class="n">08</span><span>Limitations</span></a></li>
+        <li><a href="notebook.html"><span class="n">09</span><span>Lab Notebook</span></a></li>
+        <li><a href="paper.html"><span class="n">10</span><span>The Paper</span></a></li>
+        <li><a href="reproducibility.html"><span class="n">—</span><span>Reproduce</span></a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" data-theme-toggle>Dark mode</button>
+      <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+      <span>Manuscript &middot; June 2026 &middot; not peer reviewed</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="wrap page" id="main">
+
+      <header class="page-head">
+        <span class="eyebrow">01 &nbsp;&mdash;&nbsp; The Question</span>
+        <h1>Why I investigated this</h1>
+        <p class="lede">Most burnout research explains relationships at the group level. Far less of it
+        tries to identify <em>which</em> individual students are heading toward burnout &mdash; early
+        enough for support to matter.</p>
+      </header>
+
+      <div class="prose stack-md">
+        <h2>The research question</h2>
+        <blockquote>Can academic burnout among secondary school and first-year undergraduate
+        students be predicted from psychological and academic factors &mdash; and can the
+        resulting model be made interpretable enough to act on?</blockquote>
+
+        <p>The study pairs two goals that are often treated separately. The first is
+        <strong>prediction</strong>: training machine-learning classifiers to sort students into
+        higher- and lower-burnout groups from a short set of survey measures. The second is
+        <strong>explanation</strong>: using SHAP (SHapley Additive exPlanations) so that a
+        prediction comes with a reason &mdash; which factors pushed a given student toward the
+        high-burnout classification, and by how much.</p>
+
+        <h2>Why this question matters</h2>
+        <p>Academic burnout &mdash; chronic emotional exhaustion, cynicism toward studies, and a
+        reduced sense of academic competence &mdash; is associated with lower performance, weaker
+        motivation, higher dropout intention, and elevated risk of depression and anxiety. It
+        tends to build cumulatively rather than appear suddenly, and it peaks around the
+        transitions between school and university, when demands and disruptions converge.</p>
+        <p>Interventions work best when they are <em>targeted</em> and <em>early</em>. Without a
+        way to flag risk in advance, schools are left responding to burnout after it is already
+        visible in grades and attendance. A short, interpretable screening model is a modest but
+        practical step toward getting ahead of that.</p>
+        <p>The sample is also deliberately chosen. Secondary and early-undergraduate students in
+        India face intense examination competition and high achievement expectations, yet they
+        are under-represented in the machine-learning-in-education literature, which skews toward
+        Western university populations.</p>
+
+        <h2>Background in brief</h2>
+        <p>The study is framed by four bodies of theory, covered in full on
+        <a href="paper.html#litreview">the literature review</a>:</p>
+        <ul>
+          <li><strong>Burnout as resource depletion</strong> (Maslach &amp; Jackson, 1981;
+          Maslach et&nbsp;al., 2001) &mdash; burnout develops from a sustained mismatch between
+          demands and coping resources.</li>
+          <li><strong>Self-efficacy theory</strong> (Bandura, 1977, 1997) &mdash; belief in
+          one's academic capability shapes whether demands are appraised as challenges or
+          threats.</li>
+          <li><strong>Control-Value Theory</strong> (Pekrun, 2006) &mdash; achievement anxiety
+          emerges when stakes are high but perceived control is low, and it drains
+          self-regulatory resources over time.</li>
+          <li><strong>A moderated-mediation model of stress and burnout</strong> (Gao et&nbsp;al.,
+          2023) &mdash; academic stress feeds burnout partly through anxiety, and self-efficacy
+          buffers that path.</li>
+        </ul>
+
+        <h2>Directional predictions</h2>
+        <p>The study was not pre-registered and did not state formal numbered hypotheses. The
+        four directional predictions below follow from the theory above; the analyses were
+        designed to evaluate them. Verdicts summarise what the
+        <a href="results.html">results</a> showed.</p>
+      </div>
+
+      <div class="hlist">
+        <div class="hrow">
+          <div class="hid">H1</div>
+          <div class="hbody">
+            Higher <strong>psychological distress</strong> is associated with a greater
+            likelihood of burnout.
+            <div class="verdict">Verdict &mdash; <span class="yes">supported</span>:
+            strongest unique predictor (B&nbsp;=&nbsp;0.356, p&nbsp;&lt;&nbsp;.001; mean&nbsp;|SHAP|&nbsp;=&nbsp;0.231).</div>
+          </div>
+        </div>
+        <div class="hrow">
+          <div class="hid">H2</div>
+          <div class="hbody">
+            Higher <strong>academic stress</strong> is associated with a greater likelihood of
+            burnout.
+            <div class="verdict">Verdict &mdash; <span class="partial">partially supported</span>:
+            strong on its own (r&nbsp;=&nbsp;.441, p&nbsp;&lt;&nbsp;.001) but not a unique
+            predictor once distress is included (B&nbsp;=&nbsp;&minus;0.096, p&nbsp;=&nbsp;.107).</div>
+          </div>
+        </div>
+        <div class="hrow">
+          <div class="hid">H3</div>
+          <div class="hbody">
+            Greater <strong>self-efficacy</strong> is associated with a lower likelihood of
+            burnout.
+            <div class="verdict">Verdict &mdash; <span class="yes">supported</span>:
+            B&nbsp;=&nbsp;&minus;0.308, p&nbsp;&lt;&nbsp;.001; mean&nbsp;|SHAP|&nbsp;=&nbsp;0.110.</div>
+          </div>
+        </div>
+        <div class="hrow">
+          <div class="hid">H4</div>
+          <div class="hbody">
+            Greater <strong>social support</strong> is associated with a lower likelihood of
+            burnout.
+            <div class="verdict">Verdict &mdash; <span class="yes">supported</span>:
+            B&nbsp;=&nbsp;&minus;0.314, p&nbsp;&lt;&nbsp;.001; mean&nbsp;|SHAP|&nbsp;=&nbsp;0.163.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="prose" style="margin-top:36px">
+        <div class="callout">
+          <span class="tag">Scope note</span>
+          Every relationship in this study is <strong>observational and cross-sectional</strong>.
+          "Predict" here means statistical prediction within a dataset, not a claim that any
+          factor causes burnout. See <a href="interpretation.html">Interpretation</a>.
+        </div>
+      </div>
+
+      <nav class="pager">
+        <a href="index.html"><span class="dir">Previous</span>Home</a>
+        <a class="next" href="study.html"><span class="dir">Next</span>02 &mdash; The Study</a>
+      </nav>
+
+    </main>
+
+    <footer class="page-foot">
+      <div class="wrap">
+        <div class="cite" id="cite">
+          <strong>Cite this work</strong><br>
+          Dhariwal, I. (2026). <em>Predicting Academic Burnout in Secondary School and
+          Undergraduate Students Using Explainable Machine Learning: The Roles of Academic
+          Stress, Psychological Distress, Self-Efficacy, and Social Support</em>. Independent
+          student research manuscript.
+          <button class="copy-btn" data-copy="#cite">Copy</button>
+        </div>
+        <div class="flinks">
+          <a href="paper.html">Read the manuscript</a>
+          <a href="reproducibility.html">Reproduce the analysis</a>
+          <a href="study.html#ethics">Ethics &amp; privacy</a>
+          <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+          <span class="muted small">&copy; <span data-year>2026</span> Ishaanvi Dhariwal</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

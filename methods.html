@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Method — Academic Burnout ML</title>
+<meta name="description" content="The machine learning pipeline: target construction, feature set and standardisation, four classifiers, five-fold stratified cross-validation, and SHAP explainability.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <span class="title">Academic Burnout ML</span>
+  <button class="hamburger" data-nav-open aria-label="Open navigation" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="index.html">
+        <span class="mark">Independent Research</span>
+        <span class="title">Academic Burnout ML</span>
+        <span class="sub">Explainable prediction of student burnout</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <ol>
+        <li><a href="index.html"><span class="n">00</span><span>Home</span></a></li>
+        <li><a href="question.html"><span class="n">01</span><span>The Question</span></a></li>
+        <li><a href="study.html"><span class="n">02</span><span>The Study</span></a></li>
+        <li><a href="data.html"><span class="n">03</span><span>The Data</span></a></li>
+        <li><a href="methods.html"><span class="n">04</span><span>The Method</span></a></li>
+        <li><a href="experiments.html"><span class="n">05</span><span>The Experiments</span></a></li>
+        <li><a href="results.html"><span class="n">06</span><span>The Results</span></a></li>
+        <li><a href="interpretation.html"><span class="n">07</span><span>Interpretation</span></a></li>
+        <li><a href="limitations.html"><span class="n">08</span><span>Limitations</span></a></li>
+        <li><a href="notebook.html"><span class="n">09</span><span>Lab Notebook</span></a></li>
+        <li><a href="paper.html"><span class="n">10</span><span>The Paper</span></a></li>
+        <li><a href="reproducibility.html"><span class="n">—</span><span>Reproduce</span></a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" data-theme-toggle>Dark mode</button>
+      <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+      <span>Manuscript &middot; June 2026 &middot; not peer reviewed</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="wrap page" id="main">
+
+      <header class="page-head">
+        <span class="eyebrow">04 &nbsp;&mdash;&nbsp; The Method</span>
+        <h1>How the question was tested</h1>
+        <p class="lede">A deliberately simple pipeline: four features, four classifiers of
+        increasing complexity, honest cross-validation, and SHAP to explain the winner.</p>
+      </header>
+
+      <div class="divider-num"><span class="dn">4.1</span><span class="dl">Target variable</span></div>
+      <div class="prose stack-md">
+        <p>The continuous burnout composite was dichotomised at the <strong>sample median
+        (3.29)</strong>. Students at or above the median form the <strong>High Burnout</strong>
+        class (n&nbsp;=&nbsp;181, 56.4%); those below form the <strong>Low Burnout</strong> class
+        (n&nbsp;=&nbsp;140, 43.6%).</p>
+        <p>A median split makes binary classification possible and follows prior burnout-classification
+        work, but it discards information in the continuous score and produces two well-separated
+        classes. Both consequences are treated as limitations on
+        <a href="limitations.html">the Limitations page</a> and revisited in
+        <a href="interpretation.html">Interpretation</a>.</p>
+      </div>
+
+      <div class="divider-num"><span class="dn">4.2</span><span class="dl">Feature set &amp; standardisation</span></div>
+      <div class="prose stack-md">
+        <p>Four continuous composite scores were used as features: <strong>academic stress,
+        psychological distress, self-efficacy, social support</strong>. No demographic, sleep, or
+        screen-time variables were included in the primary models.</p>
+        <p>All features were standardised to zero mean and unit variance (<code>StandardScaler</code>),
+        <strong>fit inside each training fold only</strong> and then applied to the held-out fold.
+        This prevents information from the test fold leaking into preprocessing &mdash; the most
+        common way cross-validated scores get quietly inflated.</p>
+      </div>
+
+      <div class="divider-num"><span class="dn">4.3</span><span class="dl">The four classifiers</span></div>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>Table &mdash; Algorithms, in order of increasing flexibility</caption>
+          <thead>
+            <tr><th>Model</th><th>Family</th><th>Decision boundary</th><th>Why it&rsquo;s in the comparison</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Logistic Regression</td><td>Linear probabilistic</td><td>Linear</td><td class="note-cell">Interpretable baseline; coefficients map directly onto the regression analysis</td></tr>
+            <tr><td>Support Vector Machine</td><td>Kernel method (RBF)</td><td>Nonlinear</td><td class="note-cell">Optimal-margin separation in a transformed feature space</td></tr>
+            <tr class="hi"><td>Random Forest</td><td>Bagged tree ensemble</td><td>Nonlinear, piecewise</td><td class="note-cell">Robust, resistant to overfitting via bagging, native feature importances &mdash; best performer</td></tr>
+            <tr><td>XGBoost</td><td>Gradient-boosted trees</td><td>Nonlinear, additive</td><td class="note-cell">Sequential boosting of weak learners; strong empirical track record</td></tr>
+          </tbody>
+        </table>
+        <p class="tnote">Spanning linear to ensemble models answers a specific question: does the
+        extra flexibility of tree ensembles buy meaningful predictive gain over a linear model
+        here? (<a href="experiments.html">Experiments</a> &mdash; the answer is "a little".)</p>
+      </div>
+
+      <div class="divider-num"><span class="dn">4.4</span><span class="dl">Validation &amp; metrics</span></div>
+      <div class="prose stack-md">
+        <p>Every model was evaluated with <strong>five-fold stratified cross-validation</strong>:
+        the data is split into five folds that each preserve the 56/44 class ratio, each fold
+        serves as the test set exactly once, and results are averaged. Mean and standard
+        deviation across folds are reported.</p>
+        <ul>
+          <li><strong>Accuracy</strong> &mdash; overall proportion correct.</li>
+          <li><strong>Precision</strong> &mdash; of students flagged high-burnout, the share who
+          truly are.</li>
+          <li><strong>Recall</strong> &mdash; of truly high-burnout students, the share flagged.</li>
+          <li><strong>F1</strong> &mdash; harmonic mean of precision and recall.</li>
+          <li><strong>ROC-AUC</strong> &mdash; ranking quality across all thresholds.</li>
+        </ul>
+      </div>
+
+      <div class="divider-num"><span class="dn">4.5</span><span class="dl">SHAP explainability</span></div>
+      <div class="prose stack-md">
+        <p>For the best model (Random Forest), <strong>SHAP</strong> values were computed with
+        <code>TreeExplainer</code> for all 321 observations. SHAP, grounded in cooperative game
+        theory, attributes each prediction to its features additively &mdash; giving both a
+        <em>global</em> importance ranking (mean absolute SHAP per feature) and <em>local</em>
+        explanations for individual students.</p>
+        <div class="callout">
+          <span class="tag">What SHAP is and isn&rsquo;t</span>
+          SHAP describes how features moved the <em>model&rsquo;s</em> output. It is a statement
+          about the model, not about causation in the world. A large SHAP value for distress
+          means the model leaned heavily on distress &mdash; not that reducing distress would
+          reduce burnout by a corresponding amount.
+        </div>
+      </div>
+
+      <div class="divider-num"><span class="dn">4.6</span><span class="dl">Software</span></div>
+      <div class="prose">
+        <p>Analyses were run in Python&nbsp;3.11 using scikit-learn (models, CV, scaling),
+        XGBoost, and the <code>shap</code> library; the statistical analyses used
+        <code>statsmodels</code> and <code>pingouin</code>. Versions and a one-command run are on
+        <a href="reproducibility.html">Reproduce the Work</a>.</p>
+      </div>
+
+      <nav class="pager">
+        <a href="data.html"><span class="dir">Previous</span>03 &mdash; The Data</a>
+        <a class="next" href="experiments.html"><span class="dir">Next</span>05 &mdash; The Experiments</a>
+      </nav>
+
+    </main>
+
+    <footer class="page-foot">
+      <div class="wrap">
+        <div class="cite" id="cite">
+          <strong>Cite this work</strong><br>
+          Dhariwal, I. (2026). <em>Predicting Academic Burnout in Secondary School and
+          Undergraduate Students Using Explainable Machine Learning: The Roles of Academic
+          Stress, Psychological Distress, Self-Efficacy, and Social Support</em>. Independent
+          student research manuscript.
+          <button class="copy-btn" data-copy="#cite">Copy</button>
+        </div>
+        <div class="flinks">
+          <a href="paper.html">Read the manuscript</a>
+          <a href="reproducibility.html">Reproduce the analysis</a>
+          <a href="study.html#ethics">Ethics &amp; privacy</a>
+          <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+          <span class="muted small">&copy; <span data-year>2026</span> Ishaanvi Dhariwal</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

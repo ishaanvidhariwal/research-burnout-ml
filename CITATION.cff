@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: >-
+  Predicting Academic Burnout in Secondary School and Undergraduate Students
+  Using Explainable Machine Learning: The Roles of Academic Stress,
+  Psychological Distress, Self-Efficacy, and Social Support
+authors:
+  - family-names: Dhariwal
+    given-names: Ishaanvi
+type: report
+year: 2026
+month: 6
+notes: Independent student research manuscript. Not peer reviewed.
+keywords:
+  - academic burnout
+  - psychological distress
+  - self-efficacy
+  - social support
+  - machine learning
+  - SHAP
+  - explainable artificial intelligence
+  - India

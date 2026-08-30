@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Reproduce the Work — Academic Burnout ML</title>
+<meta name="description" content="Repository layout, Python environment, the analysis pipeline step by step, a reference implementation, and how to cite the work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <span class="title">Academic Burnout ML</span>
+  <button class="hamburger" data-nav-open aria-label="Open navigation" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="index.html">
+        <span class="mark">Independent Research</span>
+        <span class="title">Academic Burnout ML</span>
+        <span class="sub">Explainable prediction of student burnout</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <ol>
+        <li><a href="index.html"><span class="n">00</span><span>Home</span></a></li>
+        <li><a href="question.html"><span class="n">01</span><span>The Question</span></a></li>
+        <li><a href="study.html"><span class="n">02</span><span>The Study</span></a></li>
+        <li><a href="data.html"><span class="n">03</span><span>The Data</span></a></li>
+        <li><a href="methods.html"><span class="n">04</span><span>The Method</span></a></li>
+        <li><a href="experiments.html"><span class="n">05</span><span>The Experiments</span></a></li>
+        <li><a href="results.html"><span class="n">06</span><span>The Results</span></a></li>
+        <li><a href="interpretation.html"><span class="n">07</span><span>Interpretation</span></a></li>
+        <li><a href="limitations.html"><span class="n">08</span><span>Limitations</span></a></li>
+        <li><a href="notebook.html"><span class="n">09</span><span>Lab Notebook</span></a></li>
+        <li><a href="paper.html"><span class="n">10</span><span>The Paper</span></a></li>
+        <li><a href="reproducibility.html"><span class="n">—</span><span>Reproduce</span></a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" data-theme-toggle>Dark mode</button>
+      <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+      <span>Manuscript &middot; June 2026 &middot; not peer reviewed</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="wrap page" id="main">
+
+      <header class="page-head">
+        <span class="eyebrow">&mdash; &nbsp; Reproduce the Work</span>
+        <h1>Environment, pipeline, and how to run it</h1>
+        <p class="lede">The raw data stays private, but the structure, the steps, and a
+        reference implementation are all here. A synthetic dataset lets the pipeline run end to
+        end.</p>
+      </header>
+
+      <div class="privacy-lock">
+        <span class="ico">&#128274;</span>
+        <div>
+          Running against the <strong>real</strong> 321-response dataset requires access to the
+          private data file. Everything below runs against
+          <code>data/synthetic_sample.csv</code>, which shares the column structure but not the
+          real distributions &mdash; so numbers produced from it will not match the paper.
+        </div>
+      </div>
+
+      <div class="divider-num"><span class="dn">R.1</span><span class="dl">Repository layout</span></div>
+      <pre><code>academic-burnout-ml/
+&#9500;&#9472; data/
+&#9474;  &#9500;&#9472; README.md              &#8592; what is and isn't shared, and why
+&#9474;  &#9492;&#9472; synthetic_sample.csv   &#8592; same columns, synthetic rows
+&#9500;&#9472; docs/
+&#9474;  &#9500;&#9472; data-dictionary.md
+&#9474;  &#9500;&#9472; methodology.md
+&#9474;  &#9500;&#9472; ethics.md
+&#9474;  &#9492;&#9472; limitations.md
+&#9500;&#9472; paper/
+&#9474;  &#9500;&#9472; paper.md               &#8592; full manuscript, Markdown
+&#9474;  &#9492;&#9472; manuscript.pdf
+&#9500;&#9472; src/
+&#9474;  &#9500;&#9472; preprocessing.py       &#8592; composites, reverse-scoring, median split
+&#9474;  &#9500;&#9472; models.py              &#8592; the four classifiers + 5-fold stratified CV
+&#9474;  &#9500;&#9472; evaluation.py          &#8592; accuracy / precision / recall / F1 / ROC-AUC
+&#9474;  &#9492;&#9472; explainability.py      &#8592; SHAP TreeExplainer on the Random Forest
+&#9500;&#9472; requirements.txt
+&#9500;&#9472; CITATION.cff
+&#9492;&#9472; README.md</code></pre>
+      <p class="tnote">The <code>src/</code> filenames above describe the intended structure of
+      the analysis code. Drop the actual scripts/notebooks used for the manuscript into that
+      folder so the site and the code stay in step.</p>
+
+      <div class="divider-num"><span class="dn">R.2</span><span class="dl">Environment</span></div>
+      <pre><code># Python 3.11
+python -m venv .venv
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+pip install -r requirements.txt</code></pre>
+      <pre><code># requirements.txt
+numpy
+pandas
+scikit-learn
+xgboost
+shap
+statsmodels
+pingouin
+matplotlib</code></pre>
+      <p class="tnote">Pin exact versions (<code>pip freeze &gt; requirements.txt</code>) before
+      publishing so results are reproducible.</p>
+
+      <div class="divider-num"><span class="dn">R.3</span><span class="dl">Pipeline, step by step</span></div>
+      <ol class="prose">
+        <li><strong>Load &amp; clean.</strong> Read responses, drop duplicate submissions
+        (response-pattern check), apply complete-case filtering per scale.</li>
+        <li><strong>Build composites.</strong> Mean of items per construct. Reverse-score the two
+        efficacy items (<code>6 - x</code>) before averaging them into the burnout composite.</li>
+        <li><strong>Construct the target.</strong> <code>burnout_class = (burnout_score &gt;=
+        median)</code>; the median on this sample is 3.29.</li>
+        <li><strong>Cross-validate.</strong> <code>StratifiedKFold(n_splits=5)</code>. Inside
+        each fold: fit <code>StandardScaler</code> on train only, transform both; fit each model;
+        score on the held-out fold.</li>
+        <li><strong>Aggregate.</strong> Mean and SD across folds for accuracy, precision, recall,
+        F1, ROC-AUC.</li>
+        <li><strong>Explain.</strong> Refit the Random Forest on the full sample;
+        <code>shap.TreeExplainer</code> &rarr; SHAP values for all rows; mean |SHAP| per feature;
+        summary plot.</li>
+        <li><strong>Regression.</strong> Separately, OLS of the continuous burnout score on the
+        four standardised predictors (<code>statsmodels</code>).</li>
+      </ol>
+
+      <div class="divider-num"><span class="dn">R.4</span><span class="dl">Reference implementation</span></div>
+      <p class="prose small muted">Illustrative &mdash; a faithful sketch of the pipeline above,
+      not the verbatim analysis script.</p>
+      <pre><code>import numpy as np, pandas as pd
+from sklearn.model_selection import StratifiedKFold, cross_validate
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+from xgboost import XGBClassifier
+import shap
+
+FEATURES = ["academic_stress", "psych_distress", "self_efficacy", "social_support"]
+
+df = pd.read_csv("data/synthetic_sample.csv")
+X = df[FEATURES].to_numpy()
+y = (df["burnout_score"] &gt;= df["burnout_score"].median()).astype(int).to_numpy()
+
+models = {
+    "logreg": LogisticRegression(max_iter=1000),
+    "svm_rbf": SVC(kernel="rbf", probability=True),
+    "random_forest": RandomForestClassifier(n_estimators=500, random_state=42),
+    "xgboost": XGBClassifier(eval_metric="logloss", random_state=42),
+}
+cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+scoring = ["accuracy", "precision", "recall", "f1", "roc_auc"]
+
+for name, clf in models.items():
+    pipe = make_pipeline(StandardScaler(), clf)      # scaler fit inside each fold
+    res = cross_validate(pipe, X, y, cv=cv, scoring=scoring)
+    print(name, {k: round(res["test_" + k].mean(), 3) for k in scoring})
+
+# SHAP on the best model
+rf = RandomForestClassifier(n_estimators=500, random_state=42).fit(StandardScaler().fit_transform(X), y)
+sv = shap.TreeExplainer(rf).shap_values(StandardScaler().fit_transform(X))
+mean_abs = np.abs(sv[1]).mean(axis=0)
+print(dict(zip(FEATURES, np.round(mean_abs, 3))))</code></pre>
+
+      <div class="divider-num"><span class="dn">R.5</span><span class="dl">How to cite</span></div>
+      <pre id="bibtex"><code>@misc{dhariwal2026burnout,
+  author = {Dhariwal, Ishaanvi},
+  title  = {Predicting Academic Burnout in Secondary School and Undergraduate
+            Students Using Explainable Machine Learning: The Roles of Academic
+            Stress, Psychological Distress, Self-Efficacy, and Social Support},
+  year   = {2026},
+  note   = {Independent student research manuscript. Not peer reviewed.}
+}</code></pre>
+      <button class="copy-btn" data-copy="#bibtex" style="margin-top:8px">Copy BibTeX</button>
+
+      <div class="divider-num"><span class="dn">R.6</span><span class="dl">Deploying this site</span></div>
+      <div class="prose">
+        <p>The site is fully static &mdash; one CSS file, one JS file, no build step, all at the
+        repository root. On GitHub Pages set the source to <em>Deploy from a branch</em>, branch
+        <code>main</code>, folder <code>/ (root)</code>. Google Fonts loads over HTTPS; everything
+        else is local.</p>
+      </div>
+
+      <nav class="pager">
+        <a href="paper.html"><span class="dir">Previous</span>10 &mdash; The Paper</a>
+        <a class="next" href="index.html"><span class="dir">Next</span>Back to Home</a>
+      </nav>
+
+    </main>
+
+    <footer class="page-foot">
+      <div class="wrap">
+        <div class="cite" id="cite">
+          <strong>Cite this work</strong><br>
+          Dhariwal, I. (2026). <em>Predicting Academic Burnout in Secondary School and
+          Undergraduate Students Using Explainable Machine Learning: The Roles of Academic
+          Stress, Psychological Distress, Self-Efficacy, and Social Support</em>. Independent
+          student research manuscript.
+          <button class="copy-btn" data-copy="#cite">Copy</button>
+        </div>
+        <div class="flinks">
+          <a href="paper.html">Read the manuscript</a>
+          <a href="reproducibility.html">Reproduce the analysis</a>
+          <a href="study.html#ethics">Ethics &amp; privacy</a>
+          <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+          <span class="muted small">&copy; <span data-year>2026</span> Ishaanvi Dhariwal</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

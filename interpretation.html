@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interpretation — Academic Burnout ML</title>
+<meta name="description" content="What the findings mean: the primacy of psychological distress, social support and self-efficacy as protective factors, why academic stress attenuates, what SHAP does and does not show, and why cross-validated performance is so high.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%A0%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="topbar">
+  <span class="title">Academic Burnout ML</span>
+  <button class="hamburger" data-nav-open aria-label="Open navigation" aria-expanded="false"><span></span></button>
+</div>
+<div class="scrim"></div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="brand">
+      <a href="index.html">
+        <span class="mark">Independent Research</span>
+        <span class="title">Academic Burnout ML</span>
+        <span class="sub">Explainable prediction of student burnout</span>
+      </a>
+    </div>
+    <nav class="nav" aria-label="Sections">
+      <ol>
+        <li><a href="index.html"><span class="n">00</span><span>Home</span></a></li>
+        <li><a href="question.html"><span class="n">01</span><span>The Question</span></a></li>
+        <li><a href="study.html"><span class="n">02</span><span>The Study</span></a></li>
+        <li><a href="data.html"><span class="n">03</span><span>The Data</span></a></li>
+        <li><a href="methods.html"><span class="n">04</span><span>The Method</span></a></li>
+        <li><a href="experiments.html"><span class="n">05</span><span>The Experiments</span></a></li>
+        <li><a href="results.html"><span class="n">06</span><span>The Results</span></a></li>
+        <li><a href="interpretation.html"><span class="n">07</span><span>Interpretation</span></a></li>
+        <li><a href="limitations.html"><span class="n">08</span><span>Limitations</span></a></li>
+        <li><a href="notebook.html"><span class="n">09</span><span>Lab Notebook</span></a></li>
+        <li><a href="paper.html"><span class="n">10</span><span>The Paper</span></a></li>
+        <li><a href="reproducibility.html"><span class="n">—</span><span>Reproduce</span></a></li>
+      </ol>
+    </nav>
+    <div class="sidebar-foot">
+      <button class="theme-toggle" data-theme-toggle>Dark mode</button>
+      <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+      <span>Manuscript &middot; June 2026 &middot; not peer reviewed</span>
+    </div>
+  </aside>
+
+  <div class="main">
+    <main class="wrap page" id="main">
+
+      <header class="page-head">
+        <span class="eyebrow">07 &nbsp;&mdash;&nbsp; Interpretation</span>
+        <h1>What the findings mean &mdash; and what they don&rsquo;t</h1>
+        <p class="lede">Two analyses, run on different principles, tell one story. That
+        convergence is the finding. The size of the numbers is not.</p>
+      </header>
+
+      <div class="divider-num"><span class="dn">7.1</span><span class="dl">The primacy of psychological distress</span></div>
+      <div class="prose stack-md">
+        <p>Psychological distress was the strongest predictor of burnout in both the regression
+        (B&nbsp;=&nbsp;0.356, p&nbsp;&lt;&nbsp;.001) and the SHAP analysis (mean&nbsp;|SHAP|&nbsp;=&nbsp;0.231
+        &mdash; over four times the contribution of academic stress). This fits the classic account
+        of burnout as <em>progressive emotional resource depletion</em>: students who struggle to
+        regulate emotion and cope under sustained pressure exhaust the reserves that academic
+        engagement draws on faster than those facing domain-specific academic stress alone.</p>
+        <p>It also aligns with the moderated-mediation model in which academic anxiety carries
+        much of stress&rsquo;s effect on burnout. Distress &mdash; which spans anxiety plus
+        broader emotional strain &mdash; looks like the more proximal, more complete predictor.
+        Practically: monitoring only academic workload will miss students whose burnout is driven
+        by distress originating outside the classroom.</p>
+      </div>
+
+      <div class="divider-num"><span class="dn">7.2</span><span class="dl">Support and efficacy as protective factors</span></div>
+      <div class="prose stack-md">
+        <p><strong>Social support</strong> had the second-largest SHAP contribution (0.163) and
+        an independent regression effect (B&nbsp;=&nbsp;&minus;0.314, p&nbsp;&lt;&nbsp;.001).
+        For students in a high-pressure examination culture, believing that family support is
+        available and knowing where to seek help appears to buffer the depletion process.</p>
+        <p><strong>Self-efficacy</strong> was likewise independently protective
+        (B&nbsp;=&nbsp;&minus;0.308, p&nbsp;&lt;&nbsp;.001; mean&nbsp;|SHAP|&nbsp;=&nbsp;0.110),
+        replicating prior work in which stronger academic self-efficacy attenuates burnout under
+        stress. Higher efficacy likely reframes demands as manageable challenges rather than
+        threats, lowering the emotional strain that, sustained, becomes exhaustion and cynicism.</p>
+        <p>Together this supports a <strong>risk-and-resilience</strong> picture: burnout risk
+        depends not just on stressors present but on protective resources available.</p>
+      </div>
+
+      <div class="divider-num"><span class="dn">7.3</span><span class="dl">Why academic stress attenuates</span></div>
+      <div class="prose stack-md">
+        <p>Academic stress correlates with burnout on its own (r&nbsp;=&nbsp;.441, p&nbsp;&lt;&nbsp;.001)
+        but is <em>not</em> a unique predictor once distress is in the model
+        (B&nbsp;=&nbsp;&minus;0.096, p&nbsp;=&nbsp;.107), and it has the smallest SHAP value
+        (0.056). The most parsimonious reading is the <strong>r&nbsp;=&nbsp;.683 overlap</strong>
+        between stress and distress: entered together, distress absorbs the burnout-relevant
+        variance that stress carried alone. Consistent with a mediation account, stress may act
+        on burnout largely <em>through</em> distress rather than beside it. This is a statement
+        about these four variables in one model &mdash; not evidence that academic stress is
+        unimportant.</p>
+      </div>
+
+      <div class="divider-num" id="shap"><span class="dn">7.4</span><span class="dl">Reading the SHAP results</span></div>
+      <div class="prose stack-md">
+        <p>The SHAP summary plot adds <em>direction</em> to the importance ranking:</p>
+        <ul>
+          <li>higher <strong>psychological distress</strong> &rarr; pushes the prediction toward
+          high burnout;</li>
+          <li>higher <strong>academic stress</strong> &rarr; small push toward high burnout;</li>
+          <li>higher <strong>social support</strong> &rarr; pushes toward low burnout;</li>
+          <li>higher <strong>self-efficacy</strong> &rarr; pushes toward low burnout.</li>
+        </ul>
+        <p>Every direction matches the regression sign. That the interpretable linear model and
+        the game-theoretic explanation of a nonlinear ensemble agree is the strongest internal
+        consistency check available here.</p>
+        <div class="callout">
+          <span class="tag">The boundary of the claim</span>
+          SHAP explains the <em>model</em>. "Distress has mean&nbsp;|SHAP|&nbsp;0.231" means the
+          Random Forest relied heavily on distress when sorting these 321 students. It is not a
+          dose&ndash;response curve and not a causal effect estimate. No intervention claim
+          follows directly from a SHAP value.
+        </div>
+      </div>
+
+      <div class="divider-num" id="leakage"><span class="dn">7.5</span><span class="dl">Why is the performance so high?</span></div>
+      <div class="prose stack-md">
+        <p>A ROC-AUC of .998 warrants scrutiny rather than celebration. Several things are going
+        on, and it is worth separating the safeguards that <em>are</em> in place from the reasons
+        the number is nonetheless inflated.</p>
+
+        <div class="grid-2">
+          <div class="card">
+            <h4 style="color:var(--good)">Safeguards in place</h4>
+            <ul>
+              <li>Standardisation (<code>StandardScaler</code>) was fit on training folds only,
+              so no test-fold statistics leaked into preprocessing.</li>
+              <li>Folds were stratified; every observation was scored exactly once as held-out.</li>
+              <li>The target is a function of the burnout items only; the four predictors are
+              separate scales, so the outcome was not fed back in as a feature.</li>
+              <li>Duplicate submissions were removed before analysis.</li>
+              <li>Four independent algorithms &mdash; and the separate regression &mdash; agree,
+              which a single-model leak would not typically produce.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4 style="color:var(--warn)">Why the number is still inflated</h4>
+            <ul>
+              <li><strong>Median-split target.</strong> Splitting at the median manufactures two
+              balanced, well-separated groups. Cases near the cut are rare by construction, so the
+              boundary is unusually clean.</li>
+              <li><strong>Modest N.</strong> With 321 rows, cross-validated estimates can track
+              sample-specific structure that would not recur in new data.</li>
+              <li><strong>Single sample, no external validation.</strong> Nothing here tests the
+              model on data it has never seen from a different cohort.</li>
+              <li><strong>Self-report, same instrument.</strong> Predictors and outcome come from
+              one questionnaire completed in one sitting, sharing method variance.</li>
+            </ul>
+          </div>
+        </div>
+
+        <p>The honest summary: the pipeline avoids the obvious leakage traps, but the headline
+        metrics should be read as an <strong>optimistic upper bound under favourable conditions</strong>.
+        The claim this study can stand behind is the <em>ranking and direction</em> of predictors,
+        which is stable across methods &mdash; not that a deployable 97%-accurate burnout detector
+        exists.</p>
+      </div>
+
+      <div class="divider-num"><span class="dn">7.6</span><span class="dl">Practical implications</span></div>
+      <div class="prose stack-md">
+        <ul>
+          <li><strong>Screen for wellbeing, not just workload.</strong> Distress &mdash; broader
+          than academic stress &mdash; is the strongest signal. Wellbeing screening that captures
+          general emotional burden will catch students that a workload-only lens misses.</li>
+          <li><strong>Build protective resources, don&rsquo;t only cut stressors.</strong> Social
+          support and self-efficacy are independently protective; mentoring, peer networks,
+          visible counselling pathways, family engagement, and efficacy/coping skill-building are
+          plausible levers alongside load management.</li>
+          <li><strong>Short instruments can carry real signal.</strong> A brief, interpretable
+          model is feasible &mdash; but only after longitudinal, externally validated work
+          replaces this proof-of-concept.</li>
+        </ul>
+        <div class="callout warn">
+          <span class="tag">Not a deployment recommendation</span>
+          Nothing here should be used to screen, label, or triage real students. The design is
+          cross-sectional, the sample is small and non-representative, and the model is
+          unvalidated outside this dataset.
+        </div>
+      </div>
+
+      <nav class="pager">
+        <a href="results.html"><span class="dir">Previous</span>06 &mdash; The Results</a>
+        <a class="next" href="limitations.html"><span class="dir">Next</span>08 &mdash; Limitations</a>
+      </nav>
+
+    </main>
+
+    <footer class="page-foot">
+      <div class="wrap">
+        <div class="cite" id="cite">
+          <strong>Cite this work</strong><br>
+          Dhariwal, I. (2026). <em>Predicting Academic Burnout in Secondary School and
+          Undergraduate Students Using Explainable Machine Learning: The Roles of Academic
+          Stress, Psychological Distress, Self-Efficacy, and Social Support</em>. Independent
+          student research manuscript.
+          <button class="copy-btn" data-copy="#cite">Copy</button>
+        </div>
+        <div class="flinks">
+          <a href="paper.html">Read the manuscript</a>
+          <a href="reproducibility.html">Reproduce the analysis</a>
+          <a href="study.html#ethics">Ethics &amp; privacy</a>
+          <a href="https://github.com/ishaanvidhariwal/academic-burnout-ml">Source repository &#8599;</a>
+          <span class="muted small">&copy; <span data-year>2026</span> Ishaanvi Dhariwal</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</div>
+
+<script src="assets/app.js"></script>
+</body>
+</html>
